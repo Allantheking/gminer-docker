@@ -16,8 +16,8 @@ check_required_env "POOL"
 check_required_env "WALLET"
 
 
-./rigel --algorithm "${ALGO}" --url "${POOL}" --username "${WALLET}"
+./gminer --algo  "${ALGO}" --server "${POOL}" --user "${WALLET}"
 while [ $? -eq 42 ]; do
     sleep 15s
-    ./rigel --algorithm "${ALGO}" --url "${POOL}" --username "${WALLET}"
+    ./gminer --algo  "${ALGO}" --server "${POOL}" --user "${WALLET}"
 done
