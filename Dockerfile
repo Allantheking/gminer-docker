@@ -1,28 +1,29 @@
 FROM nvidia/cuda:12.4.1-base-ubuntu22.04 as nvidia
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG RIGEL_VERSION=1.17.4
+ARG GMINER_VERSION=3.42
+ARG GMINER2_VERSION=3_42
 
 RUN apt-get update && \
     apt-get install -y wget tar curl libcurl4 && \
     rm -rf /var/lib/apt/lists/*
-
-RUN wget https://github.com/rigelminer/rigel/releases/download/${RIGEL_VERSION}/rigel-${RIGEL_VERSION}-linux.tar.gz -O /tmp/rigel.tar.gz && \
-    mkdir -p /opt/rigel && \
-    tar --strip-components=1 -xvf /tmp/rigel.tar.gz -C /opt/rigel && \
-    rm /tmp/rigel.tar.gz
+wget https://github.com/develsoftware/GMinerRelease/releases/download/3.42/gminer_3_42_linux64.tar.xz
+RUN wget https://github.com/develsoftware/GMinerRelease/releases/download/${GMINER_VERSION}/gminer_${GMINER2_VERSION}_linux64.tar.gz -O /tmp/gminer.tar.gz && \
+    mkdir -p /opt/gminer && \
+    tar --strip-components=1 -xvf /tmp/gminer.tar.gz -C /opt/gminer && \
+    rm /tmp/gminer.tar.gz
 
 # Make the rigel binary executable
-RUN chmod +x /opt/rigel/rigel
+RUN chmod +x /opt/gminer/gminer
 
 # Copy the entrypoint script into the image
-COPY entrypoint.sh /opt/rigel/entrypoint.sh
+COPY entrypoint.sh /opt/gminer/entrypoint.sh
 
 # Make the entrypoint script executable
-RUN chmod +x /opt/rigel/entrypoint.sh
+RUN chmod +x /opt/gminer/entrypoint.sh
 
 # Set working directory
-WORKDIR /opt/rigel
+WORKDIR /opt/gminer
 
 # Define environment variables with default values
 ENV ALGO=""
@@ -31,4 +32,4 @@ ENV WALLET=""
 ENV EXTRA=""
 
 # Set the entrypoint to the entrypoint script
-ENTRYPOINT ["/opt/rigel/entrypoint.sh"]
+ENTRYPOINT ["/opt/gminer/entrypoint.sh"]
