@@ -1,8 +1,8 @@
 FROM nvidia/cuda:12.4.1-base-ubuntu22.04 as nvidia
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG GMINER_VERSION=3.42
-ARG GMINER2_VERSION=3_42
+ARG GMINER_VERSION=3.44
+ARG GMINER2_VERSION=3_44
 
 RUN apt-get update && \
     apt-get install -y wget tar curl libcurl4 && \
