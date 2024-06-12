@@ -7,7 +7,7 @@ ARG GMINER2_VERSION=3_42
 RUN apt-get update && \
     apt-get install -y wget tar curl libcurl4 && \
     rm -rf /var/lib/apt/lists/*
-wget https://github.com/develsoftware/GMinerRelease/releases/download/3.42/gminer_3_42_linux64.tar.xz
+
 RUN wget https://github.com/develsoftware/GMinerRelease/releases/download/${GMINER_VERSION}/gminer_${GMINER2_VERSION}_linux64.tar.gz -O /tmp/gminer.tar.gz && \
     mkdir -p /opt/gminer && \
     tar --strip-components=1 -xvf /tmp/gminer.tar.gz -C /opt/gminer && \
