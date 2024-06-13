@@ -6,15 +6,12 @@ ARG GMINER2_VERSION=3_44
 
 RUN apt-get update && \
     apt-get install -y wget tar curl libcurl4 && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN wget https://github.com/develsoftware/GMinerRelease/releases/download/${GMINER_VERSION}/gminer_${GMINER2_VERSION}_linux64.tar.xz -O /tmp/gminer.tar.xz && \
+    wget https://github.com/develsoftware/GMinerRelease/releases/download/${GMINER_VERSION}/gminer_${GMINER2_VERSION}_linux64.tar.xz -O /tmp/gminer.tar.xz && \
     mkdir -p /opt/gminer && \
     tar --strip-components=1 -xvf /tmp/gminer.tar.xz -C /opt/gminer && \
-    rm /tmp/gminer.tar.xz
-
-# Make the rigel binary executable
-RUN chmod +x /opt/gminer/gminer
+    rm /tmp/gminer.tar.xz && \
+    chmod +x /opt/gminer/gminer && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy the entrypoint script into the image
 COPY entrypoint.sh /opt/gminer/entrypoint.sh
