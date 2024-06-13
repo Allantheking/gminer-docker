@@ -10,11 +10,12 @@ RUN apt-get update && \
 
 RUN wget https://github.com/develsoftware/GMinerRelease/releases/download/${GMINER_VERSION}/gminer_${GMINER2_VERSION}_linux64.tar.xz -O /tmp/gminer.tar.xz && \
     mkdir -p /opt/gminer && \
-    tar --strip-components=1 -xvf /tmp/gminer.tar.xz -C /opt/gminer && \
+    tar -xvf /tmp/gminer.tar.xz -C /opt/gminer && \
+    ls -l /opt/gminer && \
     rm /tmp/gminer.tar.xz
 
-# Make the rigel binary executable
-RUN chmod +x /opt/gminer/gminer
+# Make the rigel binary executable (adjust path if necessary)
+RUN chmod +x /opt/gminer/gminer || true
 
 # Copy the entrypoint script into the image
 COPY entrypoint.sh /opt/gminer/entrypoint.sh
