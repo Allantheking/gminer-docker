@@ -25,4 +25,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: kyuubi2709/rigel-docker-nvidia:latest
+          tags: kyuubi2709/gminer-docker-nvidia:latest
