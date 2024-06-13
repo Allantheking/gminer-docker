@@ -16,8 +16,8 @@ check_required_env "POOL"
 check_required_env "WALLET"
 
 
-./gminer --algo  "${ALGO}" --server "${POOL}" --user "${WALLET}"
+./miner --algo  "${ALGO}" --server "${POOL}" --user "${WALLET}"
 while [ $? -eq 42 ]; do
     sleep 15s
-    ./gminer --algo  "${ALGO}" --server "${POOL}" --user "${WALLET}"
+    ./miner --algo  "${ALGO}" --server "${POOL}" --user "${WALLET}"
 done
